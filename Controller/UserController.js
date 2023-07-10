@@ -13,6 +13,11 @@ const newUser = async (req, res) => {
     const user = new userModel(req.body);
     try {
       await user.save();
+
+     
+      // console.log(user._id.toString().substring(0,100))
+     
+
       // If no image submitted, exit
       if (!image) return res.sendStatus(400);
       // Move the uploaded image to our upload folder
@@ -32,6 +37,8 @@ const newUser = async (req, res) => {
 
 const allUser = async(req,res)=>{
   const getUsers = await userModel.find().populate('user_profile');
+  // const getUsers = await Profile.find().populate('user_id',"-_id -__v");
+
   try{
     res.send(getUsers);
   }catch (error){
